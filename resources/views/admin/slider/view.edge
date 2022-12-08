@@ -1,0 +1,43 @@
+@layout('admin/layouts/main')
+@section('body')
+
+<div class="row">
+
+  <div class="col-md-12">
+    <div class="card no-b shadow">
+      <div class="card-body p-0">
+        <div class="text-center">
+          <h1 class="h1">Sliders</h1>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover ">
+            <tbody>
+              @each(slider in sliders)
+              <tr>
+                <td class="w-10">
+                  <img src="{{slider?.image}}" alt="">
+                </td>
+                <td>
+                  <h6>{{slider?.preHeading}}</h6>
+                </td>
+                <td>
+                  <h5>{{slider?.postHeading}}</h5>
+                </td>
+                <td>
+                  <span><i class="icon icon-data_usage"></i> {{slider.timePassed}}</span><br>
+                  <span><i class="icon icon-timer"></i> {{slider.createdAt}}</span>
+                </td>
+                <td>
+                  <a class="btn-fab btn-fab-sm btn-primary shadow text-white"
+                    href="{{ route('slider-view', { id:slider?._id }) }}"><i class="icon-pencil"></i></a>
+                </td>
+              </tr>
+              @end
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@end

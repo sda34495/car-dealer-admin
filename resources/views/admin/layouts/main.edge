@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Dealer</title>
+    @entryPointStyles('app')
+    @entryPointScripts('app')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css"></script>
+</head>
+
+<body>
+    @include('admin/layouts/side-bar')
+    @include('admin/layouts/header')
+
+
+    <div class="page has-sidebar-left">
+        <header class="my-3">
+            <div class="container-fluid">
+                @!section('body')
+            </div>
+        </header>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    $('.dropify').dropify();
+
+</script>

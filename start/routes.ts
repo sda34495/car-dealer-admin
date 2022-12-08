@@ -19,7 +19,7 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-
+import "./routes/adminRoutes"
 Route.get('/', async ({ view }) => {
-  return view.render('welcome')
+  return view.render('admin/slider/form')
 })
