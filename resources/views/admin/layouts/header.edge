@@ -6,17 +6,17 @@
                     <div class="col">
                         <h4>
                             <i class="icon-box"></i>
-                            {{nav.title}}
+                            {{nav?.title? nav.title:'Car Dealer'}}
                         </h4>
                     </div>
                 </div>
                 <div class="row">
                     <ul class="nav responsive-tab nav-material nav-material-white" id="v-pills-tab">
-                        @each(el in nav.elements)
+                        @each(el in nav?.elements)
                         <li>
-                            {{--  {{el.redirectUrl}}  --}}
-                            <a class="nav-link {{el.title==nav.active?'active':''}}"  id="v-pills-1-tab"
-                                data-toggle="pill" href="{{ route('slider-view', {  }) }}" >
+                            <a href="{{route(el.redirectUrl , { })}}"
+                                class="nav-link {{el.title==nav.active?'active':''}}" id="v-pills-1-tab"
+                                data-toggle="pill">
                                 <i class="icon icon-home2"></i>{{el.title}}</a>
                         </li>
                         @end

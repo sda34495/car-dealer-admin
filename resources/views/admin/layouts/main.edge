@@ -9,7 +9,9 @@
     @entryPointScripts('app')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css">
+    </script>
 </head>
 
 <body>
@@ -31,5 +33,17 @@
 
 <script>
     $('.dropify').dropify();
+    console.log({{updates}})
+    if({{ flashMessages.get('updates.hasSuccessMessage') }}){
+    // console.log('Hello')
+        Swal.fire({
+  position: 'top-center',
+  icon: 'success',
+  title: "{{ flashMessages.get('updates.title') }}",
+  showConfirmButton: false,
+  timer: 1500,
+  width: 350,
+})
+    }
 
 </script>

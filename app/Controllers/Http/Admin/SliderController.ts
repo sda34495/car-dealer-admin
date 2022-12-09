@@ -1,10 +1,11 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import BaseController from 'App/Controllers/BaseController'
 import MediaUploader from 'App/Controllers/helpers/MediaUploader'
 import TimingController from 'App/Controllers/helpers/TimingController'
 import { Slider } from 'App/Models/Slider'
 
-export default class QouteController {
-  private elements = [
+export default class SliderController {
+  private static elements = [
     { title: 'All Sliders', redirectUrl: 'slider-list' },
     { title: 'Add new', redirectUrl: 'slider-view' },
   ]
@@ -17,7 +18,7 @@ export default class QouteController {
           let timePassed = TimingController.calculateTimePassed(date)
           return { ...el, createdAt: date.toDateString(), timePassed }
         }),
-        elements: this.elements,
+        elements: SliderController.elements,
         active: 'All Sliders',
       })
     }
@@ -29,19 +30,19 @@ export default class QouteController {
           slider: sliderToEdit,
           pageTitle: 'Edit Slider',
           buttonText: 'Upadate',
-          elements: this.elements,
+          elements: SliderController.elements,
         })
       }
       return view.render('admin/slider/form', {
         pageTitle: 'Create New Slider',
         buttonText: 'Create',
-        elements: this.elements,
+        elements: SliderController.elements,
         active: 'Add new',
       })
     }
   }
 
-  public async updateSlider({ request, params, response }: HttpContextContract) {
+  public async updateSlider({ request, params, response, session }: HttpContextContract) {
     const { preHeading, postHeading } = request.body()
     const image = request.file('image')
     let updatedPath = ''
@@ -65,6 +66,7 @@ export default class QouteController {
           },
         }
       )
+      BaseController.sendSuccessSession(session, 'Slider Upadted Successfully')
       return response.redirect().toRoute('slider-list')
     }
 
@@ -79,6 +81,8 @@ export default class QouteController {
     })
 
     await slider.save()
+    BaseController.sendSuccessSession(session, 'Slider Created Successfully')
+
     return response.redirect().toRoute('slider-list')
   }
 }
