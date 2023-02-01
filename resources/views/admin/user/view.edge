@@ -1,5 +1,5 @@
 @layout('admin/layouts/main')
-@set('nav', {title:'All Sliders',elements:elements,active:active} )
+@set('nav', {title:'All Users',elements:elements,active:active} )
 @section('body')
 
 <div class="row">
@@ -8,34 +8,34 @@
     <div class="card no-b shadow">
       <div class="card-body p-0">
         <div class="text-center">
-          <h1 class="h1">Sliders</h1>
+          <h1 class="h1">Users</h1>
         </div>
         <div class="table-responsive">
           <table class="table table-hover ">
             <tbody>
-              @if(!sliders.length)
+              @if(!users.length)
               <h3 class="h3 text-center">No Record Found</h3>
               @end
-              @each(slider in sliders)
+              @each(user in users)
               <tr>
                 <td class="w-10">
-                  <img src="{{slider?.image}}" alt="">
+                  <img class="rounded-circle" width="70px" height="70px" src="{{user?.image}}" alt="">
                 </td>
                 <td>
-                  <h6>{{slider?.preHeading}}</h6>
+                  <h6>{{user?.userName}}</h6>
                 </td>
                 <td>
-                  <h5>{{slider?.postHeading}}</h5>
+                  <h5>{{user?.email}}</h5>
                 </td>
                 <td>
-                  <span><i class="icon icon-data_usage"></i> {{slider.timePassed}}</span><br>
-                  <span><i class="icon icon-timer"></i> {{slider.createdAt}}</span>
+                  <span><i class="icon icon-data_usage"></i> {{user.timePassed}}</span><br>
+                  <span><i class="icon icon-timer"></i> {{user.createdAt}}</span>
                 </td>
                 <td>
                   <a class="btn-fab btn-fab-sm btn-primary shadow text-white"
-                    href="{{ route('slider-view', { id:slider?._id }) }}"><i class="icon-pencil"></i></a>
+                    href="{{ route('user-view', { id:user?._id }) }}"><i class="icon-pencil"></i></a>
                   <a class="btn-fab btn-fab-sm btn-danger shadow text-white"
-                    onclick="deleteSlider('{{slider?._id}}')"><i class="icon-trash"></i></a>
+                    onclick="deleteUser('{{user?._id}}')"><i class="icon-trash"></i></a>
                 </td>
               </tr>
               @end
@@ -47,5 +47,5 @@
   </div>
 </div>
 
-@include('admin/slider/script')
+@include('admin/user/script')
 @end

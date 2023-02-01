@@ -21,5 +21,5 @@
 import Route from '@ioc:Adonis/Core/Route'
 import "./routes/adminRoutes"
 Route.get('/', async ({ view }) => {
-  return view.render('admin/slider/form')
+  return view.render('admin/auth/login')
 })

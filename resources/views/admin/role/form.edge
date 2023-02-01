@@ -1,0 +1,72 @@
+@layout('admin/layouts/main')
+@set('nav', {title:'Roles',elements:elements,active:active} )
+@section('body')
+<div class="animatedParent animateOnce ">
+    <div class="container-fluid my-3">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-body b-b">
+                        <h3>{{pageTitle}}</h3>
+
+                        <form method="post" action="{{ route('role-update', { id:role?role._id:"" }) }}"
+                            class="form-material" enctype="multipart/form-data">
+                            <div class="form-group form-float">
+
+                                {{-- Edit --}}
+                                <div class="col-sm-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input name="title" value="{{role?.title?.length ? role.title:''}}"
+                                                type="text" class="form-control" placeholder="Enter a Role Title.">
+                                            {{-- <label class="form-label">Post Heading</label> --}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>create</th>
+                                                <th>read</th>
+                                                <th>update</th>
+                                                <th>delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if(!modules.length)
+                                            <h3 class="h3 text-center">No Record Found</h3>
+                                            @end
+                                            @each(module in modules)
+                                            <tr>
+                                                <td>
+                                                    <h4 class="h4">{{module.title}}</h4>
+                                                </td>
+                                                @each(access in module.includeAccess)
+
+                                                <td><input {{role?.access.includes(access)?'checked':''}}
+                                                        type="checkbox" value="{{access}}" name="access"></td>
+                                                @end
+                                            </tr>
+                                            @end
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="form-group form-float">
+
+                                    <button type="submit" class="btn btn-success mt-2"><i
+                                            class="icon-arrow_forward mr-2"></i>{{buttonText}}
+                                    </button>
+
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@end

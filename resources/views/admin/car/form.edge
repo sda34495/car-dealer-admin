@@ -1,0 +1,78 @@
+@layout('admin/layouts/main')
+@set('nav', {title:'Cars',elements:elements,active:active} )
+@section('body')
+<div class="animatedParent animateOnce ">
+    <div class="container-fluid my-3">
+        <div class="row">
+            <div class="col-md-7 ">
+                <div class="card">
+                    <div class="card-body b-b">
+                        <h3>{{pageTitle}}</h3>
+                        {{-- first form --}}
+                        <form method="post" enctype="multipart/form-data"
+                            action="{{ route('car-update', { id:car?car._id:"" }) }}">
+                            <!-- Gutter g-1 -->
+                            <div class="row g-1">
+                                <!-- Name input -->
+                                <div class="form-group focused">
+                                    <label class="form-label" for="form9Example2">Car Name</label>
+                                    <input value="{{car?.name ? car.name :''}}" name="name" type="text"
+                                        placeholder="Car Name" id="form9Example2"
+                                        class="form-control form-control-lg r-0" />
+                                </div>
+
+
+                                <div class="col form-group focused">
+                                    <label class="form-label for=" form9Example2">HeadLine</label>
+                                    <input name="headLine" value="{{car?.headLine ? car.headLine :''}}"
+                                        placeholder="Headline For the Car" type="text" id="form9Example2"
+                                        class="form-control form-control-lg r-0" />
+
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <!-- Gutter g-5 -->
+                            <div class="row g-5">
+                                <div class="col form-group focused">
+                                    <label class="form-label" for="form9Example2">Price</label>
+                                        <input name="price" type="text" value="{{car?.price ? car.price :''}}"
+                                            id="form9Example2" placeholder="Enter Car Price"
+                                            class="form-control form-control-lg r-0" />
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group form-float float-right">
+
+                                <button type="submit" class="btn btn-success mt-2"><i
+                                        class="icon-arrow_forward mr-2"></i>{{buttonText}}
+                                </button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {{-- first form End --}}
+              
+
+                @if(car)
+                <hr>
+                @include('admin/car/description-form')
+                <hr>
+                @include('admin/car/image-form')
+                <hr>
+                @include('admin/car/tabs-form')
+                @end
+                
+               
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+@include('admin/car/script')
+@end

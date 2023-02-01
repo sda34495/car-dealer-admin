@@ -12,6 +12,6 @@ export default class TimingController {
     const interval = intervals.find((i) => i.seconds < seconds)
     const count = Math.floor(seconds / interval?.seconds)
 
-    return `${count} ${interval?.label}${count !== 1 ? 's' : ''} ago`
+    return `${count?count:'1'} ${interval?.label ? interval.label : 'second'}${count !== 1 ? 's' : ''} ago`
   }
 }

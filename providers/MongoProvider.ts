@@ -27,6 +27,7 @@ export default class MongoProvider {
   public async register() {
     // Register your own bindings
     try {
+      
       let connectionString = await Env.get('MONGO_CONNECTION_STRING',{ useUnifiedTopology: true }) 
       await mongoose.connect(
         connectionString

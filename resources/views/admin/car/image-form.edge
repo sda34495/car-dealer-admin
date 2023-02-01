@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-md-7 ">
+        <div class="card">
+            <div class="card-body b-b">
+                <h1>Select Images</h1>
+                <div class="row">
+
+                    @if(car?.images.length)
+                    @each(image in car.images)
+                    <div class="col-md-4">
+                        <div class="bgWhite widgetCard">
+                            <div class="image img-pos">
+                                <span style="cursor: pointer" class="close" onclick="deleteImage('{{car._id}}','{{image._id}}')" >&times;</span>
+                                <img src="{{image.path}}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+
+                    @end
+                    @end
+                </div>
+
+                <form method="post" enctype="multipart/form-data"
+                    action="{{ route('car-update', { id:car?car._id:"" }) }}">
+                    <!-- Gutter g-1 -->
+                    <div class="row g-1">
+                        <div class="col form-group focused">
+                            <label class="form-label" for="form9Example2">Images</label>
+                            <input name="images[]" type="file" multiple id="form9Example2"
+                                class="form-control form-control-lg r-0 dropify" />
+
+                        </div>
+                    </div>
+
+                    <hr />
+
+
+
+
+                    <div class="form-group form-float float-right">
+
+                        <button type="submit" class="btn btn-success mt-2"><i
+                                class="icon-arrow_forward mr-2"></i>{{buttonText}}
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+        </div>

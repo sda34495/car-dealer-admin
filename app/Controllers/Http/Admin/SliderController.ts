@@ -10,8 +10,9 @@ export default class SliderController {
     { title: 'Add new', redirectUrl: 'slider-view' },
   ]
   public async view({ request, view, params }: HttpContextContract) {
+          
     if (request.url().includes('/slider-list')) {
-      const sliders = await Slider.find().lean()
+      const sliders = await Slider.find({ isDeleted: false }).lean()
       return view.render('admin/slider/view', {
         sliders: sliders.map((el) => {
           const date = new Date(el.createdAt)
@@ -84,5 +85,23 @@ export default class SliderController {
     BaseController.sendSuccessSession(session, 'Slider Created Successfully')
 
     return response.redirect().toRoute('slider-list')
+  }
+
+  public async deleteSlider({ params, session, response }: HttpContextContract) {
+    if (params?.id) {
+      await Slider.findOneAndUpdate(
+        {
+          _id: params.id,
+        },
+        {
+          $set: {
+            isDeleted: true,
+          },
+        }
+      )
+     
+      BaseController.sendSuccessSession(session, 'Slider Deleted Successfully')
+      return response.redirect().back()
+    }
   }
 }

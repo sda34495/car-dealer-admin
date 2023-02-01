@@ -1,5 +1,5 @@
 @layout('admin/layouts/main')
-@set('nav', {title:'All Sliders',elements:elements,active:active} )
+@set('nav', {title:'All Cars',elements:elements,active:active} )
 @section('body')
 
 <div class="row">
@@ -13,29 +13,29 @@
         <div class="table-responsive">
           <table class="table table-hover ">
             <tbody>
-              @if(!sliders.length)
+              @if(!cars.length)
               <h3 class="h3 text-center">No Record Found</h3>
               @end
-              @each(slider in sliders)
+              @each(car in cars)
               <tr>
                 <td class="w-10">
-                  <img src="{{slider?.image}}" alt="">
+                  <img src="{{car?.images[0]?.path}}" alt="">
                 </td>
                 <td>
-                  <h6>{{slider?.preHeading}}</h6>
+                  <h6>{{car.name}}</h6>
                 </td>
                 <td>
-                  <h5>{{slider?.postHeading}}</h5>
+                  <h5>{{car?.model}}</h5>
                 </td>
                 <td>
-                  <span><i class="icon icon-data_usage"></i> {{slider.timePassed}}</span><br>
-                  <span><i class="icon icon-timer"></i> {{slider.createdAt}}</span>
+                  <span><i class="icon icon-data_usage"></i> {{car.timePassed}}</span><br>
+                  <span><i class="icon icon-timer"></i> {{car.createdAt}}</span>
                 </td>
                 <td>
                   <a class="btn-fab btn-fab-sm btn-primary shadow text-white"
-                    href="{{ route('slider-view', { id:slider?._id }) }}"><i class="icon-pencil"></i></a>
+                    href="{{ route('car-view', { id:car?._id }) }}"><i class="icon-pencil"></i></a>
                   <a class="btn-fab btn-fab-sm btn-danger shadow text-white"
-                    onclick="deleteSlider('{{slider?._id}}')"><i class="icon-trash"></i></a>
+                    onclick="deleteCar ('{{car?._id}}')"><i class="icon-trash"></i></a>
                 </td>
               </tr>
               @end
@@ -47,5 +47,5 @@
   </div>
 </div>
 
-@include('admin/slider/script')
+@include('admin/car/script')
 @end

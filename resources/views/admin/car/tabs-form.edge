@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-md-7 ">
+        <div class="card">
+            <div class="card-body b-b">
+                <h1 class="h1">Tabs</h1>
+
+                <form method="post" enctype="multipart/form-data"
+                    action="{{ route('car-detail-tab', { id:car?car._id:"" }) }}">
+                    <!-- Gutter g-1 -->
+
+                    <div class="col form-group focused">
+                        <label class="form-label for=" form9Example2">HeadLine</label>
+                        <input name="heading" placeholder="Tab Heading" type="text" id="form9Example2"
+                            class="form-control form-control-lg r-0" />
+
+                    </div>
+                    <div class="col form-group focused">
+                        <label class="form-label for=" form9Example2">Description</label>
+                        <textarea  id="summernote" name="description" name="editordata"></textarea>
+
+                    </div>
+
+
+
+
+
+                    <div class="form-group form-float float-right">
+
+                        <button type="submit" class="btn btn-success mt-2"><i
+                                class="icon-arrow_forward mr-2"></i>{{buttonText}}
+                        </button>
+
+                    </div>
+                </form>
+
+                <ul class="list-group list-group-light mb-3">
+                  @if(car?.tabs.length)
+                @each(tab in car.tabs)
+                <li class="list-group-item">
+                    <h5 class="fw-bold">{{tab.heading}}</h5>
+                    <p class="text-muted mb-0">
+                    {{tab.description}}
+                    </p>
+                    </li>
+                @endeach
+                  @endif
+                     
+                  </ul>
+           
+            </div>
+        </div>
+
+        
